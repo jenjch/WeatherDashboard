@@ -18,7 +18,7 @@ var APIKey = "&appid=20aa66a0baa968575e1210fe8cdeaa70";
       city +
       "&units=imperial" +
       APIKey;
-  
+
     // Run the AJAX call to the OpenWeatherMap API
     $.ajax({
       url: queryURL,
@@ -29,13 +29,16 @@ var APIKey = "&appid=20aa66a0baa968575e1210fe8cdeaa70";
 
         // Log the queryURL
         console.log(queryURL);
-  
         // Log the resulting object
         console.log(response);
+
+        // Create var to pull the icon "code" and create var for the URL to insert next to city/date
+        var iconCurrent = response.weather[0].icon;
+        var iconCurrentLink = "http://openweathermap.org/img/w/" + iconCurrent + ".png";
   
         // Transfer content to HTML
         $(".city").html(
-          "<h1>" + response.name + " " + "(" + momentTodayDate + ")" + "</h1>"
+          "<h1>" + response.name + " (" + momentTodayDate + ")" + "<span><img src='" + iconCurrentLink + "'</img></h1>"
         );
         $(".wind").text("Wind Speed: " + response.wind.speed + " MPH");
         $(".humidity").text("Humidity: " + response.main.humidity + "%");
@@ -97,7 +100,7 @@ var APIKey = "&appid=20aa66a0baa968575e1210fe8cdeaa70";
   
       // Log the resulting object
       console.log(response);
-  
+
       // Output the 5 day forecast and append individual data points to forecastBody class already in HTML
       var cardBody = $(".forecastBody");
       // Define var row outside loop to only create one
@@ -107,35 +110,40 @@ var APIKey = "&appid=20aa66a0baa968575e1210fe8cdeaa70";
       for (var i = 1; i < response.list.length; i += 8) {
 
         // Create Var for each pulled i to make it simpler to type/reference 
-        var weather = response.list[i];
+        var forecast = response.list[i];
+        // Create var for icon code and create var for URL to insert in each day   
+        var iconForecast = forecast.weather[0].icon;
+        var iconForecastLink = "http://openweathermap.org/img/w/" + iconForecast + ".png";
         
         // Log the date, temp, and humidity
-        console.log(weather.dt_txt);
-        console.log(weather.main.temp);
-        console.log(weather.main.humidity);
+        console.log(forecast.dt_txt);
+        console.log(forecast.main.temp);
+        console.log(forecast.main.humidity);
 
         // Convert the time format pulled from array to preferred format using moment
-        var convertedDate = moment(weather.dt_txt, "YYYY-MM-DD HH:mm").format("MM/DD/YY");
+        var convertedDate = moment(forecast.dt_txt, "YYYY-MM-DD HH:mm").format("MM/DD/YY");
 
         // Log to test converted day works
         console.log(convertedDate);
 
-        // Create Div for each day's forecast
+        // Create div for each day's forecast
         var forecastDiv = $("<div>");
 
         // Add classes to each forcast day div (made each individual cards)
         forecastDiv.attr("class", "forecast card col-sm-2");
 
-        // Create p tags and populate text of each data point (date, temp, humidity)
-        var temp = $("<p>").text("Temp: " + weather.main.temp + " °F");
-        var humidity = $("<p>").text("Humidity: " + weather.main.humidity + "%");
+        // Create p tags, img tag, and populate text of each data point (date, temp, icon, humidity)
         var date = $("<p>").text(convertedDate);
+        var addIcon = $("<img>").attr('src', iconForecastLink);
+        var temp = $("<p>").text("Temp: " + forecast.main.temp + " °F");
+        var humidity = $("<p>").text("Humidity: " + forecast.main.humidity + "%");
 
-        // Add class to date p tag
+        // Add class to date p tag and icon img tag
         date.attr("class", "forecastDate");
+        addIcon.attr("class", "image");
 
-        // Append each p tag to forecast day divs, to row div, to cardbody
-        forecastDiv.append(date, temp, humidity);
+        // Append each p tag, img tag to forecast day divs, to row div, to cardbody
+        forecastDiv.append(date, addIcon, temp, humidity);
         row.append(forecastDiv);
         cardBody.append(row);
       }
@@ -147,10 +155,11 @@ var APIKey = "&appid=20aa66a0baa968575e1210fe8cdeaa70";
   
 });
 
-// event listener for the onclick event. Pass value of text input to the function. 
-
-// document.on click
-
+// need to add icons
 // need to then work on appending the text input to Search for City card
 // and also have event listener to prompt curent and forecast functions to run
 // need to look into local storage for recording past searches
+
+// Additional notes
+// event listener for the onclick event. Pass value of text input to the function. 
+// document.on click
