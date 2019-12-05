@@ -44,15 +44,15 @@
         <div class="col-sm-3">
             <div class="card">
                 <div class="card-header">
-                    Search for a City:
+                    Search for a City
                 </div>
                 <div class="card-body">
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="City Name" aria-label="CityName" aria-describedby="button-addon2">
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary fas fa-search" type="button" id="button-addon2"> Search</button>
-                                </div>
-                              </div>
+                            </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -60,7 +60,7 @@
         <div class="col-sm-9">
             <div class="card">
                 <div class="card-header">
-                Location Stats Output
+                Current Weather
                 </div>
                 <div class="card-body">
                 <!-- Retrieved data for searched city will be dumped here -->
@@ -78,7 +78,8 @@
                 <div class="card-header">
                     5 Day Weather Forecast
                 </div>
-                <div class="card-body">
+                <div class="card-body forecastBody">
+
                 </div>
             </div>
         </div>
@@ -90,6 +91,7 @@
 
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="script.js"></script>  
 </body>
 </html>

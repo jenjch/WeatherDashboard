@@ -2,3 +2,23 @@
 font-size: 28pt;
 text-align: center;
 }
+
+.card-header {
+    font-size: larger;
+}
+
+.forecast {
+    /* width: 20%; */
+    margin-left: 22px;
+    padding-top: 10px;
+    /* margin: 10px; */
+    font-size: 14px;
+    text-align: center;
+    color: white;
+    background-color: rgb(76, 98, 172);
+}
+
+.forecastDate {
+    font-weight: bold;
+    font-size: 16px;
+}
