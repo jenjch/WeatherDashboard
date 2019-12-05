@@ -1,18 +1,23 @@
 .navbar-brand {
-font-size: 28pt;
-text-align: center;
+font-size: 50px;
+padding: 30px;
+margin: auto;
 }
 
 .card-header {
     font-size: larger;
+    text-align: center;
+}
+
+.current {
+    text-align: center;
 }
 
 .forecast {
     /* width: 20%; */
-    margin-left: 22px;
+    margin: 10px;
     padding-top: 10px;
-    /* margin: 10px; */
-    font-size: 14px;
+    font-size: 12pt;
     text-align: center;
     color: white;
     background-color: rgb(76, 98, 172);
@@ -26,4 +31,8 @@ text-align: center;
 .image {
     width: 50px;
     margin:auto;
+}
+
+.row {
+    justify-content: center;
 }

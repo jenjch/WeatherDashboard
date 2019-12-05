@@ -1,7 +1,27 @@
 $(document).ready(function() {
 
-let city = "Evanston";
+var city = "Evanston";
+var cardBody = $(".forecastBody");
 
+// Create function to add button when searching for a city
+$(".search-button").click(function () {
+    var city = $(".searchText").val();
+    
+    var buttonRow = $("<div>" + "</div></br>")
+    buttonRow.attr("class", "row");
+    var button = $("<button>" + city +"</button>");
+    button.attr("class", "btn btn-info")
+    $(".addSearchButton").append(buttonRow);
+    buttonRow.append(button);
+
+    button.click(function(){
+        $(".searchText").val(button.text());
+        $(".search-button").click()
+
+        getCurrentWeather();
+        getForecastWeather();
+    });
+ });
 // This is our API key
 var APIKey = "&appid=20aa66a0baa968575e1210fe8cdeaa70";
 
@@ -10,7 +30,7 @@ var APIKey = "&appid=20aa66a0baa968575e1210fe8cdeaa70";
     
     // Use moment to display current day in preferred format
     var momentTodayDate = moment().format("MM/DD/YY");
-  
+
     // Build the URL we need to query the current weather
     var queryURL =
       "https://api.openweathermap.org/data/2.5/weather?" +
@@ -38,7 +58,7 @@ var APIKey = "&appid=20aa66a0baa968575e1210fe8cdeaa70";
   
         // Transfer content to HTML
         $(".city").html(
-          "<h1>" + response.name + " (" + momentTodayDate + ")" + "<span><img src='" + iconCurrentLink + "'</img></h1>"
+          "<h3>" + response.name + " (" + momentTodayDate + ")" + "<span><img src='" + iconCurrentLink + "'</img></h3>"
         );
         $(".wind").text("Wind Speed: " + response.wind.speed + " MPH");
         $(".humidity").text("Humidity: " + response.main.humidity + "%");
@@ -82,6 +102,9 @@ var APIKey = "&appid=20aa66a0baa968575e1210fe8cdeaa70";
 
   // Create a function to display 5 day forecast   
   function getForecastWeather() {
+    
+    // Clear existing divs for 5 day forecast created for default city or recent search first (don't have to do for current weather since those divs were not appended. The content in divs are instead replaced with each search)
+    cardBody.empty();  
 
     // Build the URL to query 5 day forecast (displays as array of 3 hour increments) 
     var forecastQueryURL =
@@ -99,15 +122,16 @@ var APIKey = "&appid=20aa66a0baa968575e1210fe8cdeaa70";
       console.log(forecastQueryURL);
   
       // Log the resulting object
-      console.log(response);
+      console.log(response); 
 
       // Output the 5 day forecast and append individual data points to forecastBody class already in HTML
-      var cardBody = $(".forecastBody");
       // Define var row outside loop to only create one
       var row = $("<div>").attr("class", "row");
   
       // Create for loop using every 8 (8X3hrs=24hrs) of the array to output each day 
-      for (var i = 1; i < response.list.length; i += 8) {
+      for (var i = 4; i < response.list.length; i += 8) {
+
+
 
         // Create Var for each pulled i to make it simpler to type/reference 
         var forecast = response.list[i];
@@ -152,14 +176,41 @@ var APIKey = "&appid=20aa66a0baa968575e1210fe8cdeaa70";
 // Call the functions
  getCurrentWeather();
  getForecastWeather();
+
+
+//  $(document).on("click", ".search-button", function() {
+//     console.log($(this).attr("id"));
+//     // this refers to the button that was clicked
+//     var searchText = $(this).attr("id");
+//     var text = $("." + searchText).val();
+//     console.log(text);
+
+//     var city = text;
+//     getCurrentWeather();
+//     getForecastWeather();
+
+
+//     // Store based on key and value
+//     localStorage.setItem(searchText, text);
+//     alert("Saved!");
+// });
   
 });
 
-// need to add icons
-// need to then work on appending the text input to Search for City card
-// and also have event listener to prompt curent and forecast functions to run
+// need to create on click event listener to use text from search input to run call and render city current/forcast data
+// then work on appending the text input to Search for City card
+// need to be appended as button with unique classes to then trigger a search when clicked
 // need to look into local storage for recording past searches
+
+// need to consider data attributes 
+
+// last requirement to show last searched data on reload/refresh? of page
+
 
 // Additional notes
 // event listener for the onclick event. Pass value of text input to the function. 
 // document.on click
+
+// need to figure out how to pass value of search to city variable
+
+// how to load/retain last page info upon refresh?

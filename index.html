@@ -30,7 +30,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <nav class="row navbar navbar-dark bg-dark">
-                    <span class="navbar-brand mb-0 h1 fas fa-rainbow justify-content-center"> Weather Dashboard</span>
+                    <span class="navbar-brand mb-0 h1 fas fa-rainbow"> Weather Dashboard</span>
                 </nav>
             </div>
         </div>
@@ -48,22 +48,25 @@
                 </div>
                 <div class="card-body">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="City Name" aria-label="CityName" aria-describedby="button-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary fas fa-search" type="button" id="button-addon2"> Search</button>
-                            </div>
+                        <input type="search" class="form-control searchText" placeholder="City Name" aria-label="CityName" aria-describedby="basic-addon2">
+                        <button class="btn btn-outline-secondary fas fa-search search-button" type="button" id="searchText"> Search</button>
+                    </div>
+                    <div class="addSearchButton">
+                    <!-- additional buttons of recent searches populates here  -->
                     </div>
                 </div>
             </div>
         </div>
+
+        <br/>
 
         <div class="col-sm-9">
             <div class="card">
                 <div class="card-header">
                 Current Weather
                 </div>
-                <div class="card-body">
-                <!-- Retrieved data for searched city will be dumped here -->
+                <div class="card-body current">
+                <!-- Retrieved data for searched city will be dumped here in pre-set divs/classes -->
                 <div class="city"></div>
                 <div class="temp"></div>
                 <div class="humidity"></div>
@@ -79,7 +82,7 @@
                     5 Day Weather Forecast
                 </div>
                 <div class="card-body forecastBody">
-
+                <!-- Forecase generated dynamically with javascript  -->
                 </div>
             </div>
         </div>
