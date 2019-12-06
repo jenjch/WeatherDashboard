@@ -43,8 +43,7 @@ margin: auto;
     text-align: center;
 }
 
-/* .btn {
-    justify-content: center;
-    text-align: center;
-    margin: auto;
-} */
+.badge {
+    font-size: 13px;
+    padding: 5px;
+}

@@ -65,8 +65,7 @@ var APIKey = "&appid=20aa66a0baa968575e1210fe8cdeaa70";
   
         // Transfer content to HTML
         $(".city").html(
-          "<h3>" + response.name + " (" + momentTodayDate + ")" + "<span><img src='" + iconCurrentLink + "'</img></h3>"
-        );
+          "<h3>" + response.name + " (" + momentTodayDate + ")" + "<span><img src='" + iconCurrentLink + "'</img></h3>");
         $(".wind").text("Wind Speed: " + response.wind.speed + " MPH");
         $(".humidity").text("Humidity: " + response.main.humidity + "%");
         $(".temp").text("Temperature: " + response.main.temp + " °F");
@@ -101,8 +100,8 @@ var APIKey = "&appid=20aa66a0baa968575e1210fe8cdeaa70";
           // Log the resulting object
           console.log(response);
   
-          // Transfer content to HTML
-          $(".UV").text("UV Index: " + response.value);
+          // Transfer content of to HTML and add formatting around number
+          $(".UV").html("UV Index: " + `<span class="badge badge-danger">${(response.value)}</span>`);
         });
       });
   };
@@ -183,7 +182,15 @@ var APIKey = "&appid=20aa66a0baa968575e1210fe8cdeaa70";
 
 // Call the functions for the default Evanston location
  getCurrentWeather(city);
- getForecastWeather(city);
+ getForecastWeather(city); 
+
+
+// JSON
+// set item stringify
+// get item (object), parse back to JSON
+// on page load, check local storage. if key and value exists, then do something to output, if not, render ("return") default state
+
+
 
 
 //  $(document).on("click", ".search-button", function() {
