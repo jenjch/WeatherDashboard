@@ -1,32 +1,39 @@
 $(document).ready(function() {
 
-var city = "Evanston";
+// set up a default city 
+var city = "Evanston"
 var cardBody = $(".forecastBody");
 
 // Create function to add button when searching for a city
 $(".search-button").click(function () {
     var city = $(".searchText").val();
-    
-    var buttonRow = $("<div>" + "</div></br>")
-    buttonRow.attr("class", "row");
+
+    console.log($(this));
+
+    // localStorage.setItem(key, value);
+
+    // Create button for each search and run search functions on click, as well as append button
     var button = $("<button>" + city +"</button>");
-    button.attr("class", "btn btn-info")
-    $(".addSearchButton").append(buttonRow);
-    buttonRow.append(button);
-
-    button.click(function(){
-        $(".searchText").val(button.text());
-        $(".search-button").click()
-
-        getCurrentWeather();
-        getForecastWeather();
+    button.attr("class", "btn btn-outline-info btnRow")
+    button.click(function (target) {
+        console.log(target);
+        var searchedCity = target.currentTarget.innerText;
+        getCurrentWeather(searchedCity);
+        getForecastWeather(searchedCity);
     });
+    $(".addSearchButton").append(button);
+   
+    // Run these functions for the Search click event 
+    getCurrentWeather(city);
+    getForecastWeather(city);
+ 
  });
+
 // This is our API key
 var APIKey = "&appid=20aa66a0baa968575e1210fe8cdeaa70";
 
   // Create a function for displaying current weather   
-  function getCurrentWeather () {
+  function getCurrentWeather (targetCity) {
     
     // Use moment to display current day in preferred format
     var momentTodayDate = moment().format("MM/DD/YY");
@@ -35,7 +42,7 @@ var APIKey = "&appid=20aa66a0baa968575e1210fe8cdeaa70";
     var queryURL =
       "https://api.openweathermap.org/data/2.5/weather?" +
       "q=" +
-      city +
+      targetCity +
       "&units=imperial" +
       APIKey;
 
@@ -101,7 +108,7 @@ var APIKey = "&appid=20aa66a0baa968575e1210fe8cdeaa70";
   };
 
   // Create a function to display 5 day forecast   
-  function getForecastWeather() {
+  function getForecastWeather(targetCity) {
     
     // Clear existing divs for 5 day forecast created for default city or recent search first (don't have to do for current weather since those divs were not appended. The content in divs are instead replaced with each search)
     cardBody.empty();  
@@ -109,7 +116,7 @@ var APIKey = "&appid=20aa66a0baa968575e1210fe8cdeaa70";
     // Build the URL to query 5 day forecast (displays as array of 3 hour increments) 
     var forecastQueryURL =
       "https://api.openweathermap.org/data/2.5/forecast?q=" +
-      city +
+      targetCity +
       "&units=imperial&" +
       APIKey;
   
@@ -173,9 +180,10 @@ var APIKey = "&appid=20aa66a0baa968575e1210fe8cdeaa70";
       }
     });
   };
-// Call the functions
- getCurrentWeather();
- getForecastWeather();
+
+// Call the functions for the default Evanston location
+ getCurrentWeather(city);
+ getForecastWeather(city);
 
 
 //  $(document).on("click", ".search-button", function() {
@@ -197,20 +205,35 @@ var APIKey = "&appid=20aa66a0baa968575e1210fe8cdeaa70";
   
 });
 
-// need to create on click event listener to use text from search input to run call and render city current/forcast data
-// then work on appending the text input to Search for City card
-// need to be appended as button with unique classes to then trigger a search when clicked
-// need to look into local storage for recording past searches
 
-// need to consider data attributes 
+// $(document).on("click", ".saveBtn", function() {
+//     console.log($(this).attr("id"));
+//     // this refers to the button that was clicked
+//     var textInput = $(this).attr("id");
+//     var text = $("." + textInput).val();
+//     console.log(text);
+
+//     // Store based on key and value
+//     localStorage.setItem(textInput, text);
+//     alert("Saved!");
+//   });
+
+//   // Retrieve all objects in storage and output based on index, i.e. {textInput0: "inserted text"} in localStorage
+//   var allStorage = Object.entries(localStorage);
+//   // Used for loop to account for all individual input fields.
+//   for (var i = 0; i < allStorage.length; i++) {
+//     var pair = allStorage[i];
+//     var key = pair[0];
+//     var value = pair[1];
+//     // Naming the ids in the Button row (originally used as key to store) and the classes in the textarea row the same allows us to "pass" the value to output/retain input from local storage onto page.
+//     $("." + key).val(value);
+//   }
+
+
+
+
+// need to look into local storage for recording past searches
 
 // last requirement to show last searched data on reload/refresh? of page
 
 
-// Additional notes
-// event listener for the onclick event. Pass value of text input to the function. 
-// document.on click
-
-// need to figure out how to pass value of search to city variable
-
-// how to load/retain last page info upon refresh?

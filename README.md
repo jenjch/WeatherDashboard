@@ -8,9 +8,9 @@ Whenever I could, I used jQuery to code the javascript. I created some basic HTM
 
 ## Process
 
-I first tackled the API calls, making sure I could produce current weather, forecasted weather, and UV conditions with 3 different API URLS, with a default (Evanston) location. Then I researched how to add icons denoting the weather conditions. stackoverflow was helpful for this as I learned that the icon information was included in the response object output, and were part of hosted URL images.
+I first tackled the API calls, making sure I could produce current weather, forecasted weather, and UV conditions with 3 different API URLS, with a default (Evanston) location. Then I researched how to add icons denoting the weather conditions. stackoverflow was helpful for this as I learned that the icon information was included in the response object output, and were hosted URL images.
 
-I did some pseudo coding to break down the steps for creating the rows/columns/classes/ids/data attributes, and for the onclick events/local storage.
+I did some pseudo coding to break down the steps for creating the calls and outputing the data, and for the onclick events.
 
 
 During and after completing the assignment, I commented out each step of my javascript code, so that when I come back to it, I could understand exactly what I did and why. 
