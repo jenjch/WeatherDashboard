@@ -18,9 +18,9 @@ During and after completing the assignment, I commented out each step of my java
 
 Aftering completing requirements for the assignment, I did a final update of the files in Github and deployed the website for review. 
 
-https://github.com/jenjch/weatherDashboard
+https://github.com/jenjch/WeatherDashboard
 
-https://jenjch.github.io/weatherDashboard
+https://jenjch.github.io/WeatherDashboard
 
 ## Acceptance Criteria
 
